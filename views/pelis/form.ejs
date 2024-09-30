@@ -1,0 +1,61 @@
+<%- include('../../components/header.ejs') %>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-xxl-4">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title"><% if (peli) { %>Editar Película<% } else { %>Registrar Película<% } %></h5>
+                    
+                    <form method="post" action="<% if (peli) { %>
+                        /pelis/<%= peli.id %>/edit
+                    <% } else { %>
+                        /pelis/create
+                    <% } %>" enctype="multipart/form-data">
+                        <div class="mt-2">
+                            <label>Nombre de la Película</label>
+                            <input class="form-control" type="text" name="nombre" placeholder="Nombre de la película" 
+                                value="<%= peli && peli.nombre %>">
+                        </div>
+                        <div class="mt-2">
+                            <label>Sinopsis</label>
+                            <textarea class="form-control" name="sinopsis" placeholder="Sinopsis de la película"><%= peli && peli.sinopsis %></textarea>
+                        </div>
+                        <label>Fecha de Lanzamiento</label>
+                        <div class="mt-2">
+                            <input class="form-control" type="date" name="fecha_lanzamiento" 
+                                value="<%= peli ? peli.fecha_lanzamiento: '' %>">
+                        </div>
+                        <div class="mt-2">
+                            <label>Trailer de YouTube</label>
+                            <input class="form-control" type="url" name="trailer_youtube" placeholder="Link del trailer en YouTube"
+                                value="<%= peli && peli.trailer_youtube %>">
+                        </div>
+                        <div class="mt-2">
+                            <label>Calificación Rotten Tomatoes</label>
+                            <input class="form-control" type="number" step="0.01" name="calificacion_rotten_tomatoes" placeholder="Calificación en Rotten Tomatoes"
+                                value="<%= peli && peli.calificacion_rotten_tomatoes %>">
+                        </div>
+                        <div class="mt-2">
+                            <label>Director</label>
+                            <select class="form-control" name="id_director">
+                                <option value="" disabled <% if (!peli) { %>selected<% } %>>Seleccionar Director</option>
+                                <% directores.forEach(director => { %>
+                                    <option value="<%= director.id %>" <% if (peli && peli.id_director === director.id) { %>selected<% } %>><%= director.nombre %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        <div class="mt-2">
+                            <label>Cargar portada de la Película</label>
+                            <input class="form-control" type="file" name="imagen">
+                        </div>
+                        <div class="mt-2">
+                            <input class="btn btn-primary" type="submit" value="Enviar">
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../../components/footer.ejs') %>

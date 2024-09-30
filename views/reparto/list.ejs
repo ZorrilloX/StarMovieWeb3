@@ -1,0 +1,46 @@
+<%- include('../../components/header.ejs') %>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>Lista de reparto <%= peli ? 'de "' +peli.nombre+ '"': 'general' %></h3>
+                    </div>
+                    <div class="mb-3">
+                        <% if (peli) { %>
+                            <a class="btn btn-primary" href="/pelis/<%= peli.id %>/reparto/create"> + Insertar y editar Reparto</a>
+                        <% } %>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID Reparto</th>
+                                    <th>Actor</th>
+                                    <th>Película</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% reparto.forEach(item => { %>
+                                    <tr>
+                                        <td><%= item.id %></td>
+                                        <td><%= item.actor.nombre %></td>
+                                        <td><%= item.peli.nombre %></td>
+                                        <td>
+                                            <form method="post" action="/pelis/<%= item.peli.id %>/reparto/<%= item.id %>/delete" onsubmit="return confirm('¿Seguro que deseas eliminar este actor del reparto?')">
+                                                <button class="btn btn-danger">Eliminar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../../components/footer.ejs') %>

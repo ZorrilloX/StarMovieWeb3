@@ -1,0 +1,33 @@
+<%- include('../../components/header.ejs') %>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-xxl-4">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title"><% if (director) { %>Editar director<% } else { %>Registrar director<% } %></h5>
+                    
+                    <form method="post" action="<% if (director) { %>
+                        /directores/<%= director.id %>/edit
+                    <% } else { %>
+                        /directores/create
+                    <% } %>" enctype="multipart/form-data">
+                        <div class="mt-2">
+                            <label>Nombre del director</label>
+                            <input class="form-control" type="text" name="nombre" placeholder="Nombre del director" 
+                                value="<%= director && director.nombre %>">
+                        </div>
+                        <div class="mt-2">
+                            <label>Cargar su Fotito</label>
+                            <input class="form-control" type="file" name="imagen">
+                        </div>
+                        <div class="mt-2">
+                            <input class="btn btn-primary" type="submit" value="Enviar">
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../../components/footer.ejs') %>

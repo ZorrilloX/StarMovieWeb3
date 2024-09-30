@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarMovie</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .text-yellow { color: #ffd32a; }
+        .title-custom {
+            font-size: 2rem; /* Cambia el tamaño según lo necesites */
+            font-weight: bold; /* Para que esté en negrita */
+        }
+        body {padding-top: 60px;
+            display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye el espacio entre el contenido y el footer */
+    min-height: 100vh;  }
+        .footer {
+            background-color: #000000; 
+            color: #ffffff;
+            padding: 30px 0; 
+            
+            bottom: 0px;
+            border-top: 1px solid #e9ecef;
+        }
+        .footer a {
+            color: #ffffff; /* Color de los enlaces */
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: #ffd32a; /* Color al pasar el ratón */
+            text-decoration: underline;
+        }
+        .social-icons a {
+            color: #ffffff; /* Color de los íconos sociales */
+            font-size: 1.5rem; 
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-black border-bottom border-body fixed-top">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex  align-items-center" id="navbarSupportedContent">
+            <div class="flex-grow-1 text-center">
+                <a class="navbar-brand title-custom text-warning" href="/StarMovie">StarMovie+</a>
+            </div>
+        </div>
+        
+    </div>
+</nav>

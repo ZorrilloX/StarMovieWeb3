@@ -1,0 +1,91 @@
+<%- include('../../components/header.ejs') %>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-xxl-4">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Asignar Actores a "<%= peli.nombre %>"</h5>
+                    
+                    <form method="post" action="" enctype="multipart/form-data" id="asignar-form">
+                        <div id="actores-container">
+                            <% actoresSeleccionados.forEach(actor => { %>
+                                <div class="mt-2">
+                                    <label>Actor</label>
+                                    <select class="form-control" name="id_actores[]">
+                                        <option value="<%= actor.id %>" selected><%= actor.nombre %></option> <!-- Opción seleccionada -->
+                                        <% actoresDisponibles.forEach(act => { %>
+                                            <% if (actor.id !== act.id) { %> <!-- Evitar que se repita el actor ya seleccionado -->
+                                                <option value="<%= act.id %>"><%= act.nombre %></option>
+                                            <% } %>
+                                        <% }); %>
+                                    </select>
+                                </div>
+                            <% }); %>
+
+                            <div class="mt-2">
+                                <label>+ NUEVO Actor:</label>
+                                <select class="form-control" name="id_actores[]">
+                                    <% actoresDisponibles.forEach(actor => { %>
+                                        <option value="<%= actor.id %>"><%= actor.nombre %></option>
+                                    <% }); %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <button class="btn btn-warning" type="button" id="add-actor-btn">Añadir selector actor</button>
+                            <button class="btn btn-danger" type="button" id="remove-actor-btn">Eliminar último selector</button>
+                        </div>
+
+                        <div class="mt-2">
+                            <input class="btn btn-primary" type="submit" value="Asignar Actores">
+                        </div>
+
+                        <div id="error-message" class="text-danger mt-2" style="display: none;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../../components/footer.ejs') %>
+
+<script>
+    const actoresContainer = document.getElementById('actores-container');
+    const errorMessage = document.getElementById('error-message');
+
+    document.getElementById('add-actor-btn').addEventListener('click', () => {
+        const selectHTML =` 
+            <div class="mt-2">
+                <label>+ NUEVO Actor:</label>
+                <select class="form-control" name="id_actores[]">
+                    <% actoresDisponibles.forEach(actor => { %>
+                        <option value="<%= actor.id %>"><%= actor.nombre %></option>
+                    <% }); %>
+                </select>
+            </div>
+        `;
+        actoresContainer.insertAdjacentHTML('beforeend', selectHTML);
+        errorMessage.style.display = 'none'; // Ocultar mensaje de error al añadir
+    });
+
+    document.getElementById('remove-actor-btn').addEventListener('click', () => {
+        const lastActorDiv = actoresContainer.lastElementChild;
+        if (lastActorDiv) {
+            actoresContainer.removeChild(lastActorDiv);
+            errorMessage.style.display = 'none'; // Ocultar mensaje de error al eliminar
+        }
+    });
+
+    document.getElementById('asignar-form').addEventListener('submit', (event) => {
+        const seleccionados = Array.from(document.querySelectorAll('select[name="id_actores[]"]'))
+                                   .map(select => select.value);
+        const duplicados = seleccionados.filter((item, index) => seleccionados.indexOf(item) !== index);
+
+        if (duplicados.length > 0) {
+            event.preventDefault(); // Evitar el envío del formulario
+            errorMessage.textContent = "No puedes seleccionar actores repetidos.";
+            errorMessage.style.display = 'block';
+        }
+    });
+</script>

@@ -1,0 +1,66 @@
+<%- include('../components/headerUser.ejs') %>
+
+<style>
+    body {
+        background-color: #040714;
+        color: white;
+    }
+    .persona-img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+    .movie-info {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .movie-info img {
+        width: 100%; /* O el tamaño que desees */
+        height: auto; /* Mantiene la proporción */
+        border-radius: 8px; /* Estilo opcional */
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="text-center">
+        <h1 class="display-4"><%= persona.nombre %></h1>
+        <% if (esDirector) { %>    
+            <img src="/images/directores/<%= persona.id %>.jpg" alt="<%= persona.nombre %>" class="persona-img"
+            onerror="this.src='/images/persona.jpg'">
+            <h3 class="display-6">Director</h3>
+        <% } else { %>
+            <img src="/images/actores/<%= persona.id %>.jpg" alt="<%= persona.nombre %>" class="persona-img"
+            onerror="this.src='/images/persona.jpg'">
+            <h3 class="display-6">Actor</h3>
+        <% } %>
+    </div>
+
+    <div class="row mt-5">
+        <% if (esDirector) { %>
+            <h3>Películas dirigidas por <%= persona.nombre %></h3>
+            <% persona.pelis.forEach(pelicula => { %>
+                <div class="col-lg-4 col-md-6 col-sm-12 movie-info">
+                    <a href="/StarMovie/<%= pelicula.id %>">
+                        <img src="/images/portadas/<%= pelicula.id %>.jpg" alt="<%= pelicula.nombre %>" 
+                             onerror="this.src='/images/pelicula.jpg'" class="img-fluid">
+                        <h5><%= pelicula.nombre %></h5>
+                    </a>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <h3>Películas donde actuó <%= persona.nombre %></h3>
+            <% persona.repartos.forEach(reparto => { %>
+                <div class="col-lg-4 col-md-6 col-sm-12 movie-info">
+                    <a href="/StarMovie/<%= reparto.peli.id %>">
+                        <img src="/images/portadas/<%= reparto.peli.id %>.jpg" alt="<%= reparto.peli.nombre %>" 
+                             onerror="this.src='/images/portadaDefault.jpg'" class="img-fluid">
+                        <h5><%= reparto.peli.nombre %></h5>
+                    </a>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+</div>
+
+<%- include('../components/footer.ejs') %>

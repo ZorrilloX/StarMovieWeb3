@@ -1,0 +1,56 @@
+<%- include('../components/headerUser.ejs') %>
+
+<style>
+    body {
+        background-color: #040714; /* Color oscuro de fondo */
+    }
+    .card {
+        background-color: #1c1c1e; /* Color oscuro para las tarjetas */
+        border-radius: 10px;
+        color: #ffffff; /* Color claro para el texto */
+    }
+    .card-img-top {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        height: 500px; /* Ajustar el tamaño de la imagen */
+        object-fit: cover;
+    }
+    .btn-primary {
+        background-color: #1f80e0;
+        border-color: #1f80e0;
+    }
+    .btn-primary:hover {
+        background-color: #1266b3;
+        border-color: #0f5a9c;
+    }
+</style>
+
+<div class="container mt-4">
+    <!-- Título del catálogo -->
+    <div class="text-center mb-4">
+        <h1 class="display-4 text-light">Catálogo de Películas</h1>
+        <p class="lead text-light">Explora las mejores películas según su puntuación</p>
+    </div>
+    
+    <!-- Fila de tarjetas de películas con Bootstrap -->
+    <div class="row">
+        <% peliculas.forEach(pelicula => { %>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card shadow-sm">
+                    <a href="/StarMovie/<%= pelicula.id %>">
+                        <img src="/images/portadas/<%= pelicula.id %>.jpg" class="card-img-top" 
+                        alt="<%= pelicula.nombre %>" onerror="this.src='/images/portadaDefault.jpg'">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= pelicula.nombre %></h5>
+                        <p class="card-text"><strong>Director:</strong> <%= pelicula.director ? pelicula.director.nombre : 'Desconocido' %></p>
+                        <p class="card-text"><strong>Rotten Tomatoes:</strong> <%= pelicula.calificacion_rotten_tomatoes %> %</p>
+                        <a href="/StarMovie/<%= pelicula.id %>" class="btn btn-primary">Entrar a Ver</a>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include('../components/footer.ejs') %>

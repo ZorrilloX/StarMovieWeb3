@@ -1,0 +1,83 @@
+<%- include('../components/headerUser.ejs') %>
+
+<style>
+    body {
+        background-color: #040714; /* Fondo oscuro */
+        color: white;
+    }
+    .card {
+        background-color: #1c1c1e; /* Color oscuro para las tarjetas */
+        border-radius: 10px;
+    }
+    .btn-primary {
+        background-color: #1f80e0;
+        border-color: #1f80e0;
+    }
+    .btn-primary:hover {
+        background-color: #1266b3;
+        border-color: #0f5a9c;
+    }
+    .trailer {
+        margin-top: 20px;
+        text-align: center;
+    }
+    .director-actor-img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        cursor: pointer; /* Indicador de clic */
+    }
+    .actor-info, .director-info {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container mt-4">
+    <!-- Información de la película -->
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="display-4"><%= pelicula.nombre %></h1>
+            <p><strong>Sinopsis:</strong> <%= pelicula.sinopsis %></p>
+            <p><strong>Fecha de lanzamiento:</strong> <%= new Date(pelicula.fecha_lanzamiento).toLocaleDateString() %></p>
+            <p><strong>Calificación en Rotten Tomatoes:</strong> <%= pelicula.calificacion_rotten_tomatoes %> %</p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <!-- Imagen del director -->
+            <div class="director-info">
+                <h4>Director</h4>
+                <a href="/StarMovie/director/<%= pelicula.director.id %>">
+                    <img src="/images/directores/<%= pelicula.director.id %>.jpg" alt="<%= pelicula.director.nombre %>" class="director-actor-img"
+                        onerror="this.src='/images/persona.jpg'">
+                </a>
+                <p><strong><%= pelicula.director.nombre %></strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tráiler de la película -->
+    <div class="trailer">
+        <h3>Tráiler</h3>
+        <iframe width="660" height="355" 
+            src="<%= pelicula.trailer_youtube %>" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Reparto -->
+    <div class="row mt-5">
+        <h3>Reparto</h3>
+        <% pelicula.repartos.forEach(reparto => { %>
+            <div class="col-lg-4 col-md-6 col-sm-12 text-center actor-info">
+                <a href="/StarMovie/actor/<%= reparto.actor.id %>">
+                    <img src="/images/actores/<%= reparto.actor.id %>.jpg" alt="<%= reparto.actor.nombre %>" class="director-actor-img"
+                        onerror="this.src='/images/persona.jpg'">
+                </a>
+                <p><strong><%= reparto.actor.nombre %></strong></p>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include('../components/footer.ejs') %>

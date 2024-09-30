@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+</head>
+    <style>
+        body {padding-top: 60px; }
+    </style>
+<body>
+
+    <nav class="navbar navbar-expand-md bg-dark border-bottom border-body fixed-top" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/restaurantes">Admin Quinteros R Mateo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/StarMovie">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Actores
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/actores/lista">Lista de Actores</a></li>
+                            <li><a class="dropdown-item" href="/actores/create">Agregar Actor</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Directores
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/directores/lista">Lista de Directores</a></li>
+                            <li><a class="dropdown-item" href="/directores/create">Agregar Director</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Películas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/pelis/lista">Lista de Películas</a></li>
+                            <li><a class="dropdown-item" href="/pelis/create">Agregar Película</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Reparto
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/pelis/0/reparto">Lista de Repartos</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
