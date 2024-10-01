@@ -11,7 +11,7 @@ exports.mostrarReparto = async function(req, res) {
                 where: { id_peli: idPeli }, 
                 include: [{ model: db.actores }, { model: db.pelis }]
             });
-        } else if(idPeli == 0) {// Si no hay ID de película, obtener todos los reparto
+        } else if(idPeli == 0) {// Si ID es 0 obtener todos los reparto
             reparto = await db.reparto.findAll({
                 include: [{ model: db.actores }, { model: db.pelis }]
             });
@@ -47,13 +47,13 @@ exports.crearReparto = async function(req, res) {
     res.render('reparto/form.ejs', { peli, actoresDisponibles, actoresSeleccionados });
 };
 exports.insertReparto = async function(req, res) {
-    const id_actores = req.body['id_actores[]']; // Obtener los actores seleccionados del formulario
-    const peliculaId = req.params.id; // Obtener el ID de la película desde los parámetros de la ruta
-    console.log(req.body); // Para ver qué datos estás recibiendo
+    const id_actores = req.body['id_actores[]']; 
+    const peliculaId = req.params.id; 
+    console.log(req.body); 
     try {
         const actoresExistentes = await db.reparto.findAll({
             where: { id_peli: peliculaId },
-            attributes: ['id_actor'] // Solo necesitamos los IDs de los actores
+            attributes: ['id_actor'] 
         });
 
         const idsActoresExistentes = actoresExistentes.map(reparto => reparto.id_actor); // IDs ya en la BD
@@ -82,14 +82,12 @@ exports.insertReparto = async function(req, res) {
             }
         }
 
-        // Redirigir después de insertar
-        res.redirect(`/pelis/${peliculaId}/reparto`); // Cambia esta URL según sea necesario
+        res.redirect(`/pelis/${peliculaId}/reparto`);
     } catch (error) {
         console.error("Error al insertar el reparto:", error);
         res.status(500).json({ error: "Hubo un problema al asignar actores." });
     }
 };
-
 
 // Eliminar actor del reparto
 exports.eliminarActorReparto = async function(req, res) {
